@@ -12,6 +12,9 @@ void output_board(char chess_board[8][8])
         cout << endl;
     }
     cout << "  ";
+    for (i = 97; i < 105; i++)
+        cout << (char)i << " ";
+    cout << endl;
 }
 
 int main()
