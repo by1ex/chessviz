@@ -1,10 +1,10 @@
 #List of untracked files:
 
-chessviz
+bin/main
 
 #Untracked Assembly artifacts:
 
-*.o
+build/* 
 
 #Untracked backup files:
 main.c.swp
