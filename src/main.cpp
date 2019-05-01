@@ -27,6 +27,6 @@ int main()
                               {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
                               {'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P'},
                               {'R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R'}};
-    output_board(chess_board);
+    output(chess_board);
     return 0;
 }
