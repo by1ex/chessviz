@@ -32,12 +32,12 @@ void checkSteps(char *txt, char chess_board[][8]) {
     while (1) {
       if (target == ' ' || target == '\n' || target == EOF) {
         if (target == '\n' || target == EOF) {
-          moveFigures(&white, board);
+          moveFigures(&white, chess_board);
           white.clean();
           its_black = false;
           break;
         }
-        moveFigures(&white, board);
+        moveFigures(&white, chess_board);
         white.clean();
         pars = 1;
         target = fgetc(input_file);
@@ -96,6 +96,21 @@ void checkSteps(char *txt, char chess_board[][8]) {
           exit(1);
         }
       }
+      if (pars == 4) {
+        if (target == '-' || target == 'x') {
+          pars++;
+          white.how = target;
+          target = fgetc(input_file);
+          continue;
+        } else {
+          printf("ERROR in %s line. Was exepted [-|x]:"
+                 " found - %c\n",
+                 white.num, target);
+          exit(1);
+        }
+      }
     }
   }
-  void moveFigures(step_white * white_step, char chess_board[][8]) {}
+}
+
+void moveFigures(step_white *white_step, char chess_board[][8]) {}
