@@ -137,6 +137,24 @@ void checkSteps(char *txt, char chess_board[][8]) {
           exit(1);
         }
       }
+      if (pars == 7) {
+        if (target == '#' || target == '+' || target == 'K' || target == 'Q' ||
+            target == 'R' || target == 'B' || target == 'N' || target == 'e') {
+          white.shah_mat = target;
+          target = fgetc(input_file);
+          if (target == 'e') {
+            target = fgetc(input_file);
+            target = fgetc(input_file);
+            target = fgetc(input_file);
+          }
+          continue;
+        } else {
+          printf("Error in %s line. Was exepted [#|+|e.p|FIGURE| ]: "
+                 "found - %c\n",
+                 white.num, target);
+          exit(1);
+        }
+      }
     }
   }
 }
