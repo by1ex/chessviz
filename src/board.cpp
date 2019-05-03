@@ -82,6 +82,20 @@ void checkSteps(char *txt, char chess_board[][8]) {
           exit(1);
         }
       }
+      if (pars == 3) {
+        if ((int)target >= 49 && (int)target <= 56) {
+          pars++;
+          char bufer_temp[2] = {target, '\0'};
+          strcat(white.from, bufer_temp);
+          target = fgetc(input_file);
+          continue;
+        } else {
+          printf("Error in %s line. Was exepted [1-8]:"
+                 "found - %c\n",
+                 white.num, target);
+          exit(1);
+        }
+      }
     }
   }
   void moveFigures(step_white * white_step, char chess_board[][8]) {}
