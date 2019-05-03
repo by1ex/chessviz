@@ -42,6 +42,32 @@ void checkSteps(char *txt, char chess_board[][8]) {
         pars = 1;
         target = fgetc(input_file);
       }
+      if (pars == 1) {
+        if (target == 'K' || target == 'Q' || target == 'R' || target == 'B' ||
+            target == 'N' || ((int)target >= 94 && (int)target <= 122)) {
+          if ((int)target < 94 || (int)target > 122) {
+            if (its_black) {
+              white.figure = (char)(target + 32);
+              target = fgetc(input_file);
+            } else {
+              white.figure = target;
+              target = fgetc(input_file);
+            }
+          } else {
+            if (its_black) {
+              white.figure = 'p';
+            }
+          }
+          its_black = !its_black;
+          pars++;
+          continue;
+        } else {
+          printf("Error in %s line. Was exepted [K|Q|R|N|B| ]: "
+                 "found - %c\n",
+                 white.num, target);
+          exit(1);
+        }
+      }
     }
   }
   void moveFigures(step_white * white_step, char chess_board[][8]) {}
