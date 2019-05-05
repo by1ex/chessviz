@@ -1,17 +1,20 @@
-#include "board.h"
+#include "board_read.h"
+#include "board_print_plain.h"
 #include "board_print_html.h"
 
-void checkSteps(char *txt, char chess_board[][8]) {
-  printf("\n");
-  FILE *input_file;
-  input_file = fopen(txt, "a+");
-  if (input_file == NULL) {
-    printf("Cannot open file\n");
-  }
+void checkSteps(char* txt, char chess_board[][8])
+{
+    printf("\n");
+    FILE* input_file;
+    input_file = fopen(txt, "a+");
+    if (input_file == NULL) {
+        printf("Cannot open file\n");
+        }
   rewind(input_file);
   while (!feof(input_file)) {
+    struct step_white sw_def = {"", 'P', "", "", ' ', ' '};
     char target = fgetc(input_file);
-    step_white white;
+    struct step_white white = sw_def;
     int pars = 1;
     while (target != ' ') {
       if (!isdigit(target) && target != '.') {
@@ -27,18 +30,21 @@ void checkSteps(char *txt, char chess_board[][8]) {
       target = fgetc(input_file);
     }
 
+    strcpy(sw_def.num, white.num);
     target = fgetc(input_file);
-    bool its_black = false;
+    int its_black = 0;
     while (1) {
       if (target == ' ' || target == '\n' || target == EOF) {
         if (target == '\n' || target == EOF) {
           moveFigures(&white, chess_board);
-          white.clean();
-          its_black = false;
+          white = sw_def;
+          its_black = 0;
+          printf("SUCCESS. Line %s.\n",
+                white.num);
           break;
         }
         moveFigures(&white, chess_board);
-        white.clean();
+        white = sw_def;
         pars = 1;
         target = fgetc(input_file);
       }
@@ -147,6 +153,7 @@ void checkSteps(char *txt, char chess_board[][8]) {
             target = fgetc(input_file);
             target = fgetc(input_file);
           }
+          target = fgetc(input_file);
           continue;
         } else {
           printf("Error in %s line. Was exepted [#|+|e.p|FIGURE| ]: "
@@ -158,5 +165,3 @@ void checkSteps(char *txt, char chess_board[][8]) {
     }
   }
 }
-
-void moveFigures(step_white *white_step, char chess_board[][8]) {}
