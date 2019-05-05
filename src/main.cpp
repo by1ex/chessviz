@@ -1,11 +1,11 @@
-#include "board.h"
+#include "board_read.h"
 #include "board_print_html.h"
 #include "stdio.h"
 #include "stdlib.h"
 
 using namespace std;
 
-int main()
+int main(int argc, char* argv[])
 {
     char chess_board[8][8] = {{'r', 'n', 'b', 'q', 'k', 'b', 'n', 'r'},
                               {'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p'},
@@ -61,6 +61,17 @@ int main()
     fclose(output_html);
     char str_start[30] = "0. start_position";
     printHTML(chess_board, str_start);
+    switch (argc) {
+    case 1:
+        // stepsFromConsole();
+        break;
+    case 2:
+        checkSteps(argv[1], chess_board);
+        break;
+    default:
+        printf("Не верные входные данные");
+        return 1;
+    }
     output_html = fopen("chessviz.html", "a+");
     fprintf(output_html, R"(</body>
         </html>)");
