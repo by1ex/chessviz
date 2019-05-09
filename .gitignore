@@ -6,6 +6,7 @@ bin/main
 
 build/*
 *.txt
+*.html
 
 #Untracked backup files:
 main.c.swp
