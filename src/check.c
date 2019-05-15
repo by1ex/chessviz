@@ -134,4 +134,52 @@ int Check(struct step_white* figure, char board[][8])
             }
         }
     }
+
+    if (figure->figure == 'B' || figure->figure == 'b') {
+        if (from_liter > to_liter) {
+            if (from_digit > to_digit) {
+                while (1) {
+                    from_digit--;
+                    from_liter--;
+                    if (from_liter == to_liter && from_digit == to_digit)
+                        return 1;
+                    if (board[from_digit][from_liter] != ' ') {
+                        return 0;
+                    }
+                }
+            } else if (from_digit < to_digit) {
+                while (1) {
+                    from_digit++;
+                    from_liter--;
+                    if (from_liter == to_liter && from_digit == to_digit)
+                        return 1;
+                    if (board[from_digit][from_liter] != ' ') {
+                        return 0;
+                    }
+                }
+            }
+        } else if (from_liter < to_liter) {
+            if (from_digit > to_digit) {
+                while (1) {
+                    from_digit--;
+                    from_liter++;
+                    if (from_liter == to_liter && from_digit == to_digit)
+                        return 1;
+                    if (board[from_digit][from_liter] != ' ') {
+                        return 0;
+                    }
+                }
+            } else if (from_digit < to_digit) {
+                while (1) {
+                    from_digit++;
+                    from_liter++;
+                    if (from_liter == to_liter && from_digit == to_digit)
+                        return 1;
+                    if (board[from_digit][from_liter] != ' ') {
+                        return 0;
+                    }
+                }
+            }
+        }
+    }
 }
