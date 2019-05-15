@@ -76,8 +76,18 @@ int Check(struct step_white* figure, char board[][8])
                     && to_digit - from_digit == 1) {
                 return 1;
             }
-            // else if(figure->shah_mat == 'e')
         } else {
+        }
+    }
+
+    if (figure->figure == 'N' || figure->figure == 'n') {
+        if (abs(from_digit - to_digit) == 1
+            && abs(from_liter - to_liter) == 2) {
+            return 1;
+        }
+        if (abs(from_liter - to_liter) == 1
+            && abs(from_digit - to_digit) == 2) {
+            return 1;
         }
     }
 }
