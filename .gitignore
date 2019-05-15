@@ -4,7 +4,9 @@ bin/main
 
 #Untracked Assembly artifacts:
 
-build/* 
+build/*
+*.txt
+*.html
 
 #Untracked backup files:
 main.c.swp
