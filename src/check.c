@@ -31,4 +31,16 @@ int Check(struct step_white* figure, char board[][8])
         return 6;
     }
     return 0;
+    if (figure->figure == 'K' || figure->figure == 'k') {
+        if (abs(from_liter - to_liter) == 1
+            && (abs(from_digit - to_digit) == 0
+                || abs(from_digit - to_digit) == 1)) {
+            return 1;
+        } else if (
+                abs(from_digit - to_digit) == 1
+                && (abs(from_liter - to_liter) == 0
+                    || abs(from_liter - to_liter) == 1)) {
+            return 1;
+        }
+    }
 }
