@@ -1,12 +1,13 @@
 #List of untracked files:
 
-bin/main
+bin/*
 
 #Untracked Assembly artifacts:
 
-build/*
-*.txt
-*.html
+build/src/*.o
+build/src/*.d
+build/test/*.o
+build/test/*.d
 
 #Untracked backup files:
 main.c.swp
