@@ -3,5 +3,5 @@ compiler:
   - gcc 
 dist: xenial
 script:
- - make && make test && bin/main-test
+ - make && make test && bin/test
  - git ls-files src/ | xargs clang-format -i && git diff --exit-code
