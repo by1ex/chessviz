@@ -172,3 +172,41 @@ void checkSteps(char* txt, char chess_board[][8])
         }
     }
 }
+
+void checkRead(int Error, struct step_white* move)
+{
+    if (Error == 0) {
+        printf("Error in %s line. Figure %c can not move from %s to %s \n",
+               move->num,
+               toupper(move->figure),
+               move->from,
+               move->to);
+    }
+    if (Error == 3) {
+        printf("ERROR in %s line. Figure %c not found on field %s\n",
+               move->num,
+               toupper(move->figure),
+               move->from);
+    }
+
+    if (Error == 4) {
+        printf("ERROR in %s line. Type of move is 'x' but the field %s "
+               "is empty.\n",
+               move->num,
+               move->to);
+    }
+
+    if (Error == 5) {
+        printf("ERROR in %s line. Type of move is '-' but in the field %s "
+               "there is a figure.\n",
+               move->num,
+               move->to);
+    }
+
+    if (Error == 6) {
+        printf("ERROR in %s line. Type of stroke is 'x' but in the field %s "
+               "there is the Union figure.\n",
+               move->num,
+               move->to);
+    }
+}
