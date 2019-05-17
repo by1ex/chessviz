@@ -209,3 +209,4 @@ void checkRead(int Error, struct step_white* move)
                move->num,
                move->to);
     }
+}

@@ -12,7 +12,7 @@ all:bin/main
 -include build/*.d
 
 #Список всех зависимостей обрабатываемого правила
-bin/main: build/main.o build/board_print_html.o build/board_read.o build/board_print_plain.o
+bin/main: build/main.o build/board_print_html.o build/board_read.o build/board_print_plain.o build/check.o
 	$(CC) $(CFLAGS) -o $@ $^ 
 
 build/main.o: src/main.c
@@ -25,6 +25,9 @@ build/board_read.o: src/board_read.c
 	$(CC) $(CFLAGS) -MMD -c -o $@ $<
 
 build/board_print_plain.o: src/board_print_plain.c
+	$(CC) $(CFLAGS) -MMD -c -o $@ $<
+
+build/check.o: src/check.c
 	$(CC) $(CFLAGS) -MMD -c -o $@ $<
 
 start: bin/main
