@@ -7,31 +7,47 @@ CFLAGS = -std=gnu11 -Wall -Werror
 .PHONY: clean start all
 
 # Создание зависимостей:
-all:bin/main
+all: bin/main
 
--include build/*.d
+test: bin/test
+
+-include build/src/*.d
 
 #Список всех зависимостей обрабатываемого правила
-bin/main: build/main.o build/board_print_html.o build/board_read.o build/board_print_plain.o build/check.o
+bin/main: build/src/main.o build/src/board_print_html.o build/src/board_read.o build/src/board_print_plain.o build/src/check.o
 	$(CC) $(CFLAGS) -o $@ $^ 
 
-build/main.o: src/main.c
+build/src/main.o: src/main.c
 	$(CC) $(CFLAGS) -MMD -c -o $@ $<
 
-build/board_print_html.o: src/board_print_html.c
+build/src/board_print_html.o: src/board_print_html.c
 	$(CC) $(CFLAGS) -MMD -c -o $@ $<
 
-build/board_read.o: src/board_read.c
+build/src/board_read.o: src/board_read.c
 	$(CC) $(CFLAGS) -MMD -c -o $@ $<
 
-build/board_print_plain.o: src/board_print_plain.c
+build/src/board_print_plain.o: src/board_print_plain.c
 	$(CC) $(CFLAGS) -MMD -c -o $@ $<
 
-build/check.o: src/check.c
+build/src/check.o: src/check.c
 	$(CC) $(CFLAGS) -MMD -c -o $@ $<
+
+-include build/test/*.d
+
+bin/test: build/test/main.o build/test/check.o build/test/tests.o
+	$(CC) $(CFLAGS) -o $@ $^
+
+build/test/main.o: test/main.c
+	$(CC) -I thirdparty -I src $(CFLAGS) -MMD -c -o $@ $<
+
+build/test/tests.o: test/tests.c
+	$(CC) -I thirdparty -I src $(CFLAGS) -MMD -c -o $@ $<
+
+build/test/check.o: src/check.c
+	$(CC) -I thirdparty -I src $(CFLAGS) -MMD -c -o $@ $<
 
 start: bin/main
 	bin/main
 
 clean:
-	rm -rf build/*
+	rm -rf build/src/*.o build/src/*.d build/test/*.o build/test/*.d 
