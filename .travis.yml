@@ -1,6 +1,6 @@
-language: cpp
+language: c
 compiler:
-  - g++ 
+  - gcc 
 dist: xenial
 script:
  - make
